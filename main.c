@@ -6,14 +6,16 @@
 /*   By: luzog <luzog@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 08:53:09 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/14 12:37:40 by luzog            ###   ########.fr       */
+/*   Updated: 2023/11/14 15:10:27 by luzog            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdio.h>
 
+static unsigned long long	g_talloc = 0;
 static unsigned long long	g_alloc = 0;
+static unsigned long long	g_hist = 0;
 
 void	*ft_malloc(size_t size)
 {
@@ -23,6 +25,7 @@ void	*ft_malloc(size_t size)
 	if (!ptr)
 		exit(1);
 	g_alloc += 1;
+	g_talloc += 1;
 	return (ptr);
 }
 
@@ -35,45 +38,49 @@ void	ft_free(void *ptr)
 	}
 }
 
-void	ft_free_stack(t_stack *stack)
+void	ft_free_stack(t_stack **stack)
 {
 	t_stack	*curr;
 
-	while (stack)
+	while (*stack)
 	{
-		curr = stack;
-		stack = stack->next;
+		curr = *stack;
+		*stack = (*stack)->next;
 		ft_free(curr);
 	}
 }
 
-void	ft_free_moves(t_moves *moves)
+void	ft_free_moves(t_moves **moves)
 {
 	t_moves	*curr;
 
-	while (moves)
+	while (*moves)
 	{
-		curr = moves;
-		moves = moves->next;
+		curr = *moves;
+		*moves = (*moves)->next;
 		ft_free(curr);
 	}
 }
 
-void	ft_free_pos(t_pos *pos)
+void	ft_free_pos(t_pos **pos)
 {
-	if (pos)
+	t_pos	*curr;
+
+	while (*pos)
 	{
-		ft_free_stack(pos->stack_a);
-		ft_free_stack(pos->stack_b);
-		ft_free_moves(pos->moves);
-		ft_free(pos);
+		curr = *pos;
+		*pos = (*pos)->next;
+		ft_free_stack(&curr->stack_a);
+		ft_free_stack(&curr->stack_b);
+		ft_free_moves(&curr->moves);
+		ft_free(curr);
 	}
 }
 
 void	ft_free_data(t_data *data)
 {
-	ft_free_pos(data->current_floor);
-	ft_free_pos(data->history);
+	ft_free_pos(&data->current_floor);
+	ft_free_pos(&data->history);
 }
 
 void	ft_init_data(t_data *data)
@@ -267,6 +274,7 @@ t_pos	*ft_clone_pos(t_pos *pos)
 	new->stack_a = ft_clone_stack(pos->stack_a);
 	new->stack_b = ft_clone_stack(pos->stack_b);
 	new->moves = ft_clone_moves(pos->moves);
+	new->next = NULL;
 	return (new);
 }
 
@@ -375,6 +383,7 @@ t_pos	*ft_apply_move_without_history(t_pos *pos, t_move_type move)
 	new->stack_a = ft_clone_stack(pos->stack_a);
 	new->stack_b = ft_clone_stack(pos->stack_b);
 	new->moves = NULL;
+	new->next = NULL;
 	if (move == SA || move == SB || move == SS)
 		ft_sx(new, move);
 	else if (move == PA || move == PB)
@@ -405,13 +414,6 @@ int	ft_check_solution(t_pos *pos)
 			return (0);
 		curr = curr->next;
 	}
-	curr = pos->stack_b;
-	while (curr && curr->next)
-	{
-		if (curr->value > curr->next->value)
-			return (0);
-		curr = curr->next;
-	}
 	return (1);
 }
 
@@ -429,7 +431,7 @@ int	ft_pos_exists(t_pos *history, t_pos *pos)
 	return (0);
 }
 
-void	ft_next_floor(t_data *data)
+int	ft_next_floor(t_data *data)
 {
 	t_pos		*next_floor;
 	t_pos		*curr;
@@ -444,25 +446,29 @@ void	ft_next_floor(t_data *data)
 		while (move != NONE)
 		{
 			new = ft_apply_move_without_history(curr, move);
-			if (!ft_pos_equals(new, curr))
+			if (!ft_pos_equals(new, curr)
+				&& !ft_pos_exists(data->history, new))
 			{
 				new->moves = ft_clone_moves(curr->moves);
 				ft_add_back_move(&new->moves, ft_create_move(move));
-				if (ft_pos_exists(data->history, new))
-					continue ;
-				ft_add_front_pos(&next_floor, ft_clone_pos(new));
-				if (ft_check_solution(new))
-					return ;
 				ft_add_front_pos(&data->history, ft_clone_pos(new));
+				g_hist += 1;
+				if (ft_check_solution(new))
+				{
+					ft_free_pos(&new);
+					ft_free_pos(&next_floor);
+					return (1);
+				}
+				ft_add_front_pos(&next_floor, ft_clone_pos(new));
 			}
-			ft_free_pos(new);
+			ft_free_pos(&new);
 			move = ft_get_next_move_type(move);
 		}
 		curr = curr->next;
 	}
-	ft_free_pos(data->current_floor);
+	ft_free_pos(&data->current_floor);
 	data->current_floor = next_floor;
-	ft_next_floor(data);
+	return (0);
 }
 
 void	ft_print_solution(t_pos *pos)
@@ -505,6 +511,7 @@ void	ft_print_solution(t_pos *pos)
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	int		result;
 
 	/*if (argc < 2)
 		return (0);*/
@@ -514,15 +521,16 @@ int	main(int argc, char **argv)
 	data.current_floor->stack_a = NULL;
 	data.current_floor->stack_b = NULL;
 	data.current_floor->moves = NULL;
-	ft_add_back_stack(&data.current_floor->stack_a, ft_create_stack(5));
-	ft_add_back_stack(&data.current_floor->stack_a, ft_create_stack(4));
-	ft_add_back_stack(&data.current_floor->stack_a, ft_create_stack(3));
-	ft_add_back_stack(&data.current_floor->stack_a, ft_create_stack(2));
-	ft_add_back_stack(&data.current_floor->stack_a, ft_create_stack(1));
-	ft_add_back_stack(&data.current_floor->stack_a, ft_create_stack(0));
+	data.current_floor->next = NULL;
+	for (int i = 6; i > 0; i--)
+		ft_add_back_stack(&data.current_floor->stack_a, ft_create_stack(i));
 
-	ft_next_floor(&data);
-	ft_print_solution(data.current_floor);
+	result = 0;
+	while (!result)
+	{
+		result = ft_next_floor(&data);
+	}
+	ft_print_solution(data.history);
 	ft_free_data(&data);
 	return (0);
 }
