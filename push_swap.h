@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
+/*   By: luzog <luzog@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 08:53:04 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/05 16:41:08 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/14 11:32:34 by luzog            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,15 @@ typedef enum e_move_type
 	RR,
 	RRA,
 	RRB,
-	RRR
+	RRR,
+	NONE
 }	t_move_type;
 
-typedef struct s_move
+typedef struct s_moves
 {
 	t_move_type		type;
-	struct s_move	*next;
-}	t_move;
+	struct s_moves	*next;
+}	t_moves;
 
 typedef struct s_stack
 {
@@ -45,7 +46,7 @@ typedef struct s_pos
 {
 	t_stack			*stack_a;
 	t_stack			*stack_b;
-	t_move			*moves;
+	t_moves			*moves;
 	struct s_pos	*next;
 }	t_pos;
 
