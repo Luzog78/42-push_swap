@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 08:53:04 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/16 06:35:37 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 07:46:06 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
 # define LLONG_MAX 9223372036854775807LL
-# define LLONG_MIN -9223372036854775807LL - 1LL
+# define LLONG_MIN_ALMOST -9223372036854775807LL
 
 typedef long long	t_ll;
 
@@ -141,7 +141,10 @@ void		ft_update_targets(t_pos *pos);
 void		ft_update_paths(t_pos *pos);
 void		ft_exec_move_cheapest(t_pos *pos);
 void		ft_complete_stack_a_moves(t_pos *pos);
+void		ft_print_solution(t_pos *pos);
 
 char		**ft_split(char *str, char *charset);
+void		ft_free_split(char **split);
+void		ft_putstr(char *str);
 
 #endif
