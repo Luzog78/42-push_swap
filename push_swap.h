@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 08:53:04 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/16 05:27:24 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 06:35:37 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,11 @@ void		ft_moves_add_back(t_moves **moves, t_moves *new);
 t_moves		*ft_moves_get_last(t_moves *moves);
 void		ft_free_moves(t_moves *moves);
 
-/* ************** */
-/* ***  Stack *** */
-/* ************** */
+/* *************** */
+/* ***  Stack  *** */
+/* *************** */
 
-t_stack		*ft_create_stack(int value);
+t_stack		*ft_create_stack(t_ll value);
 int			ft_stack_size(t_stack *stack);
 void		ft_stack_add_front(t_stack **stack, t_stack *new);
 void		ft_stack_add_back(t_stack **stack, t_stack *new);
@@ -108,16 +108,16 @@ t_ll		ft_stack_max(t_stack *stack);
 t_stack		*ft_stack_get_last(t_stack *stack);
 void		ft_free_stack(t_stack *stack);
 
-/* ************** */
-/* ***  Pos   *** */
-/* ************** */
+/* ************* */
+/* ***  Pos  *** */
+/* ************* */
 
 t_pos		*ft_create_pos(void);
 void		ft_free_pos(t_pos *pos);
 
-/* ****************** */
-/* ***  Calc Path *** */
-/* ****************** */
+/* ******************* */
+/* ***  Calc Path  *** */
+/* ******************* */
 
 t_moves		*ft_calc_path(t_path_calc path_calc, t_stack *curr);
 int			ft_incr_and_check_min(t_moves *path, int *i, int *min_cost);
@@ -126,14 +126,22 @@ t_moves		*ft_calc_path_rrr(t_path_calc path_calc, int *min_cost);
 t_moves		*ft_calc_path_ra_rrb(t_path_calc path_calc, int *min_cost);
 t_moves		*ft_calc_path_rra_rb(t_path_calc path_calc, int *min_cost);
 
-/* ************ */
-/* *** Main *** */
-/* ************ */
+/* ***************** */
+/* ***  Parsing  *** */
+/* ***************** */
+
+int			ft_parse(t_pos *pos, int argc, char **argv);
+
+/* ************** */
+/* ***  Main  *** */
+/* ************** */
 
 void		ft_exec_move(t_pos *pos, t_move_type move);
 void		ft_update_targets(t_pos *pos);
 void		ft_update_paths(t_pos *pos);
 void		ft_exec_move_cheapest(t_pos *pos);
 void		ft_complete_stack_a_moves(t_pos *pos);
+
+char		**ft_split(char *str, char *charset);
 
 #endif

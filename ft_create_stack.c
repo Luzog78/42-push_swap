@@ -6,13 +6,13 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 18:48:18 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/16 05:02:44 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 06:35:28 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*ft_create_stack(int value)
+t_stack	*ft_create_stack(t_ll value)
 {
 	t_stack	*new;
 
