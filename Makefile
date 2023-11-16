@@ -6,12 +6,12 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/16 07:59:02 by ysabik            #+#    #+#              #
-#    Updated: 2023/11/16 08:58:35 by ysabik           ###   ########.fr        #
+#    Updated: 2023/11/16 17:26:07 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC					= cc
-CFLAGS				= -Werror -Wall -Wextra
+CFLAGS				= -Werror -Wall -Wextra -g
 NAME				= push_swap
 BONUS_NAME			= checker
 SRC_FILES			= \
@@ -64,7 +64,7 @@ bonus : $(OBJ_FILES) $(BONUS_OBJ_FILES)
 	$(CC) $(CFLAGS) -c $< -o $@ -I.
 
 clean :
-	rm -rf $(OBJ_FILES) $(BONUS_OBJ_FILES)
+	rm -rf $(OBJ_FILES) $(MANDATORY_OBJ_FILES) $(BONUS_OBJ_FILES)
 
 fclean : clean
 	rm -rf $(NAME) $(BONUS_NAME)
