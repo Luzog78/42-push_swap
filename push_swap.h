@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 08:53:04 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/16 02:54:37 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 04:44:08 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,9 @@ typedef struct s_path_calc
 
 t_moves		*ft_create_moves(t_move_type type);
 int			ft_moves_size(t_moves *moves);
+void		ft_moves_add_front(t_moves **moves, t_moves *new);
 void		ft_moves_add_back(t_moves **moves, t_moves *new);
+t_moves		*ft_moves_get_last(t_moves *moves);
 void		ft_free_moves(t_moves *moves);
 
 /* ************** */
@@ -102,6 +104,7 @@ void		ft_stack_add_back(t_stack **stack, t_stack *new);
 t_stack		*ft_stack_pop_back(t_stack *stack);
 int			ft_stack_index_of(t_stack *stack, t_ll value);
 t_ll		ft_stack_max(t_stack *stack);
+t_stack		*ft_stack_get_last(t_stack *stack);
 void		ft_free_stack(t_stack *stack);
 
 /* ************** */
@@ -117,11 +120,10 @@ void		ft_free_pos(t_pos *pos);
 
 void		ft_exec_move(t_pos *pos, t_move_type move);
 void		ft_update_targets(t_pos *pos);
-t_moves		*ft_calc_path(t_path_calc path_calc);
+t_moves		*ft_calc_path(t_path_calc path_calc, t_stack *curr);
 void		ft_update_paths(t_pos *pos);
 void		ft_exec_move_cheapest(t_pos *pos);
-void		ft_tiny_sort(t_pos *pos);
-void		ft_rotate_to_desc(t_pos *pos);
+void		ft_complete_stack_a_moves(t_pos *pos);
 
 void *ft_malloc(size_t size);
 void ft_free(void *ptr);

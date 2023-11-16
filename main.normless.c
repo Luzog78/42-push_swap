@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:10:27 by luzog             #+#    #+#             */
-/*   Updated: 2023/11/16 02:21:23 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 04:58:53 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void	ft_print_solution(t_pos *pos)
 		i++;
 	}
 	printf("Number of moves: %d\n", i);
-	t_stack *tmp = pos->stack_a;
+	t_stack *tmp = pos->stack_b;
 	for (; tmp; tmp = tmp->next)
 		printf("%d ", tmp->value);
 	printf("\n");
@@ -174,21 +174,18 @@ int	main(int argc, char **argv)
 	t_pos	*pos;
 	int		result;
 
-	pos = shuffle(500, 400);
+	pos = shuffle(128, 400);
 	ft_exec_move(pos, PB);
 	ft_exec_move(pos, PB);
 	if (pos->stack_b->value < pos->stack_b->next->value)
 		ft_exec_move(pos, SB);
-	while (pos->stack_a /*ft_stack_size(pos->stack_a) > 3*/)
+	while (pos->stack_a)
 	{
 		ft_update_targets(pos);
 		ft_update_paths(pos);
 		ft_exec_move_cheapest(pos);
 	}
-	// ft_tiny_sort(pos);
-	ft_rotate_to_desc(pos);
-	while (pos->stack_b)
-		ft_exec_move(pos, PA);
+	ft_complete_stack_a_moves(pos);
 	ft_print_solution(pos);
 	ft_free_pos(pos);
 	return (0);

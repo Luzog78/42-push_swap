@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 00:53:32 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/16 02:55:19 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 03:50:07 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	ft_update_paths(t_pos *pos)
 	{
 		ft_reset_path(curr);
 		path_calc.target_i = ft_stack_index_of(pos->stack_b, curr->target);
-		curr->path = ft_calc_path(path_calc);
-		curr->cost = ft_moves_size(curr->path);
+		ft_calc_path(path_calc, curr);
 		curr = curr->next;
 		path_calc.curr_i++;
 	}
