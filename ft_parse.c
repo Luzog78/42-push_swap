@@ -6,14 +6,14 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 05:52:18 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/16 07:39:09 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 08:57:23 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static int	ft_has_duplicates(t_stack *stack, t_ll value);
-static int	ft_add_to_stack_a(t_pos *pos, char **split, int *is_valid);
+static void	ft_add_to_stack_a(t_pos *pos, char **split, int *is_valid);
 static int	ft_is_valid_arg(char *arg);
 static t_ll	ft_custom_atoi(char *str);
 
@@ -27,7 +27,7 @@ int	ft_parse(t_pos *pos, int argc, char **argv)
 	while (i < argc)
 	{
 		ft_add_to_stack_a(pos,
-			ft_split(argv[i], " \t\n\v\r\f"), &is_valid);
+			ft_custom_split(argv[i], " \t\n\v\r\f"), &is_valid);
 		if (!is_valid)
 			break ;
 		i++;
@@ -38,9 +38,10 @@ int	ft_parse(t_pos *pos, int argc, char **argv)
 		write(2, "Error\n", 6);
 		return (0);
 	}
+	return (1);
 }
 
-static int	ft_add_to_stack_a(t_pos *pos, char **split, int *is_valid)
+static void	ft_add_to_stack_a(t_pos *pos, char **split, int *is_valid)
 {
 	int		j;
 	t_ll	elem;

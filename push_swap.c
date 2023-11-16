@@ -1,26 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.normless.c                                    :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:10:27 by luzog             #+#    #+#             */
-/*   Updated: 2023/11/16 07:41:54 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 08:53:33 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	ft_putstr(char *str)
-{
-	size_t	len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	write(1, str, len);
-}
 
 void	ft_custom_times_algo(t_pos *pos)
 {
@@ -60,7 +50,6 @@ void	ft_tiny_sort_algo(t_pos *pos)
 int	main(int argc, char **argv)
 {
 	t_pos	*pos;
-	int		result;
 
 	argc--;
 	argv++;

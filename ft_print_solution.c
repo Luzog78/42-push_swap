@@ -6,13 +6,14 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 07:41:39 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/16 07:44:11 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 08:54:05 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static void	ft_print(t_move_type type);
+static void	ft_putstr(char *str);
 
 void	ft_print_solution(t_pos *pos)
 {
@@ -53,4 +54,14 @@ static void	ft_print(t_move_type type)
 		ft_putstr("rrb\n");
 	else if (type == RRR)
 		ft_putstr("rrr\n");
+}
+
+static void	ft_putstr(char *str)
+{
+	size_t	len;
+
+	len = 0;
+	while (str[len])
+		len++;
+	write(1, str, len);
 }

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 08:53:04 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/16 07:46:06 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 08:57:23 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,7 @@ void		ft_exec_move_cheapest(t_pos *pos);
 void		ft_complete_stack_a_moves(t_pos *pos);
 void		ft_print_solution(t_pos *pos);
 
-char		**ft_split(char *str, char *charset);
+char		**ft_custom_split(char *str, char *charset);
 void		ft_free_split(char **split);
-void		ft_putstr(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:33:50 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/16 04:53:31 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 08:10:11 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,11 @@ void	ft_complete_stack_a_moves(t_pos *pos)
 static t_moves	*ft_rotate_stack_b(t_pos *pos)
 {
 	t_stack	*curr;
-	t_stack	*prev;
 	int		index;
 	t_ll	max;
 	int		max_index;
 
 	curr = pos->stack_b;
-	prev = NULL;
 	index = 1;
 	max_index = 0;
 	max = curr->value;
@@ -46,7 +44,6 @@ static t_moves	*ft_rotate_stack_b(t_pos *pos)
 		{
 			max = curr->next->value;
 			max_index = index;
-			prev = curr;
 		}
 		index++;
 		curr = curr->next;
@@ -56,10 +53,8 @@ static t_moves	*ft_rotate_stack_b(t_pos *pos)
 
 static t_moves	*ft_get_rotation_moves(int max_index, int size)
 {
-	int		i;
 	t_moves	*moves;
 
-	i = 0;
 	moves = NULL;
 	if (max_index < size / 2)
 	{

@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_custom_split.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:05:29 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/16 06:26:52 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 09:02:04 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-char	**ft_split(char *str, char *charset);
+char	**ft_custom_split(char *str, char *charset);
 int		ft_split_len(char *str, char *charset);
 void	ft_split_fill(char *str, char *charset, char **splitted);
 void	ft_count(int *counter, int *str_j, char *str, char *charset);
 int		ft_is_inside_of(char c, char *str);
 
-char	**ft_split(char *str, char *charset)
+char	**ft_custom_split(char *str, char *charset)
 {
 	int		len;
 	char	**splitted;
