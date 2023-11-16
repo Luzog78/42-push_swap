@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 18:18:47 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/15 17:05:52 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 05:02:34 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ void	ft_free_moves(t_moves *moves)
 	{
 		curr = moves;
 		moves = moves->next;
-		ft_free(curr);
+		free(curr);
 	}
 }

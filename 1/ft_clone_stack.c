@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 18:46:30 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/15 17:05:38 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 05:02:44 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_stack	*ft_clone_stack(t_stack *stack)
 	new = NULL;
 	if (stack)
 	{
-		curr = ft_malloc(sizeof(t_stack));
+		curr = malloc(sizeof(t_stack));
 		curr->value = stack->value;
 		curr->next = NULL;
 		new = curr;
@@ -28,7 +28,7 @@ t_stack	*ft_clone_stack(t_stack *stack)
 	}
 	while (stack)
 	{
-		curr->next = ft_malloc(sizeof(t_stack));
+		curr->next = malloc(sizeof(t_stack));
 		curr = curr->next;
 		curr->value = stack->value;
 		curr->next = NULL;

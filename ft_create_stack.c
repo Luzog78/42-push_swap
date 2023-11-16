@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 18:48:18 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/15 17:05:38 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 05:02:44 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_stack	*ft_create_stack(int value)
 {
 	t_stack	*new;
 
-	new = ft_malloc(sizeof(t_stack));
+	new = malloc(sizeof(t_stack));
 	if (!new)
 		return (NULL);
 	new->value = value;

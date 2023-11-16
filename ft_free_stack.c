@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 23:07:28 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/15 17:05:52 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 05:02:34 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	ft_free_stack(t_stack *stack)
 		curr = stack;
 		stack = stack->next;
 		ft_free_moves(curr->path);
-		ft_free(curr);
+		free(curr);
 	}
 }

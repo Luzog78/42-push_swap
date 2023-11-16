@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 23:53:23 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/15 17:05:38 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 05:02:44 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_pos	*ft_create_pos(void)
 {
 	t_pos	*new;
 
-	new = ft_malloc(sizeof(t_pos));
+	new = malloc(sizeof(t_pos));
 	if (!new)
 		return (NULL);
 	new->stack_a = NULL;

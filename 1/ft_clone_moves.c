@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 18:26:13 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/15 17:05:38 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/16 05:02:44 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_moves	*ft_clone_moves(t_moves *moves)
 	new = NULL;
 	if (moves)
 	{
-		curr = ft_malloc(sizeof(t_moves));
+		curr = malloc(sizeof(t_moves));
 		curr->type = moves->type;
 		curr->next = NULL;
 		new = curr;
@@ -28,7 +28,7 @@ t_moves	*ft_clone_moves(t_moves *moves)
 	}
 	while (moves)
 	{
-		curr->next = ft_malloc(sizeof(t_moves));
+		curr->next = malloc(sizeof(t_moves));
 		curr = curr->next;
 		curr->type = moves->type;
 		curr->next = NULL;
