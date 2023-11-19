@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 16:33:50 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/16 08:10:11 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/18 22:42:29 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,21 @@ void	ft_complete_stack_a_moves(t_pos *pos)
 {
 	t_moves	*moves_rot_b;
 	t_moves	*moves_push_a;
+	t_moves	*last_rot_b;
+	t_moves	*last_pos_moves;
 
 	moves_rot_b = ft_rotate_stack_b(pos);
 	moves_push_a = ft_get_push_a_moves(pos);
-	ft_moves_get_last(moves_rot_b)->next = moves_push_a;
-	ft_moves_get_last(pos->moves)->next = moves_rot_b;
+	last_rot_b = ft_moves_get_last(moves_rot_b);
+	last_pos_moves = ft_moves_get_last(pos->moves);
+	if (last_rot_b)
+		last_rot_b->next = moves_push_a;
+	else
+		moves_rot_b = moves_push_a;
+	if (last_pos_moves)
+		last_pos_moves->next = moves_rot_b;
+	else
+		pos->moves = moves_rot_b;
 }
 
 static t_moves	*ft_rotate_stack_b(t_pos *pos)

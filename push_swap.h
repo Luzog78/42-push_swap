@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 08:53:04 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/16 08:57:23 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/19 22:15:34 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ void		ft_stack_add_front(t_stack **stack, t_stack *new);
 void		ft_stack_add_back(t_stack **stack, t_stack *new);
 t_stack		*ft_stack_pop_back(t_stack *stack);
 int			ft_stack_index_of(t_stack *stack, t_ll value);
+t_ll		ft_stack_min(t_stack *stack);
 t_ll		ft_stack_max(t_stack *stack);
 t_stack		*ft_stack_get_last(t_stack *stack);
 void		ft_free_stack(t_stack *stack);
@@ -142,6 +143,7 @@ void		ft_update_paths(t_pos *pos);
 void		ft_exec_move_cheapest(t_pos *pos);
 void		ft_complete_stack_a_moves(t_pos *pos);
 void		ft_print_solution(t_pos *pos);
+void		ft_small_sort_algo(t_pos *pos, int big_size);
 
 char		**ft_custom_split(char *str, char *charset);
 void		ft_free_split(char **split);

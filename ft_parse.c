@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 05:52:18 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/16 08:57:23 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/19 22:30:18 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ static void	ft_add_to_stack_a(t_pos *pos, char **split, int *is_valid)
 		ft_stack_add_back(&pos->stack_a, ft_create_stack(elem));
 		j++;
 	}
+	if (!j)
+		*is_valid = 0;
 	ft_free_split(split);
 }
 

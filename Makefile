@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/16 07:59:02 by ysabik            #+#    #+#              #
-#    Updated: 2023/11/16 17:26:07 by ysabik           ###   ########.fr        #
+#    Updated: 2023/11/19 21:10:38 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,9 +38,11 @@ SRC_FILES			= \
 	ft_parse.c \
 	ft_print_solution.c \
 	ft_rotate_to_desc.c \
+	ft_small_sort_algo.c \
 	ft_stack_add_back.c \
 	ft_stack_get_last.c \
 	ft_stack_index_of.c \
+	ft_stack_min.c \
 	ft_stack_max.c \
 	ft_stack_pop_back.c \
 	ft_stack_size.c \

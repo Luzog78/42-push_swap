@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:10:27 by luzog             #+#    #+#             */
-/*   Updated: 2023/11/16 08:53:33 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/19 22:26:59 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ void	ft_tiny_sort_algo(t_pos *pos)
 	}
 	else if (ft_stack_size(pos->stack_a) == 3)
 	{
-		if (pos->stack_a->value > pos->stack_a->next->value)
-			ft_exec_move(pos, SA);
-		if (pos->stack_a->value > pos->stack_a->next->next->value)
-			ft_exec_move(pos, RRA);
-		else if (pos->stack_a->next->value > pos->stack_a->next->next->value)
+		if (pos->stack_a->value > pos->stack_a->next->value
+			&& pos->stack_a->value > pos->stack_a->next->next->value)
 			ft_exec_move(pos, RA);
+		else if (pos->stack_a->next->value > pos->stack_a->value
+			&& pos->stack_a->next->value > pos->stack_a->next->next->value)
+			ft_exec_move(pos, RRA);
 		if (pos->stack_a->value > pos->stack_a->next->value)
 			ft_exec_move(pos, SA);
 	}
@@ -50,6 +50,7 @@ void	ft_tiny_sort_algo(t_pos *pos)
 int	main(int argc, char **argv)
 {
 	t_pos	*pos;
+	int		size;
 
 	argc--;
 	argv++;
@@ -58,8 +59,11 @@ int	main(int argc, char **argv)
 	pos = ft_create_pos();
 	if (!ft_parse(pos, argc, argv))
 		return (0);
-	if (ft_stack_size(pos->stack_a) <= 3)
+	size = ft_stack_size(pos->stack_a);
+	if (size <= 3)
 		ft_tiny_sort_algo(pos);
+	else if (size <= 5)
+		ft_small_sort_algo(pos, size == 5);
 	else
 		ft_custom_times_algo(pos);
 	ft_print_solution(pos);
