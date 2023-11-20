@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:10:27 by luzog             #+#    #+#             */
-/*   Updated: 2023/11/16 08:59:44 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/20 20:19:07 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,19 @@ t_move_type	ft_read(void);
 
 void	ft_check_solution(t_pos *pos)
 {
-	int	is_valid;
+	t_stack	*tmp;
+	int		is_valid;
 
+	tmp = pos->stack_a;
 	is_valid = !pos->stack_b;
-	while (pos->stack_a && pos->stack_a->next)
+	while (tmp && tmp->next)
 	{
-		if (pos->stack_a->value > pos->stack_a->next->value)
+		if (tmp->value > tmp->next->value)
 		{
 			is_valid = 0;
 			break ;
 		}
-		pos->stack_a = pos->stack_a->next;
+		tmp = tmp->next;
 	}
 	if (is_valid)
 		write(1, "OK\n", 3);

@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 05:52:18 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/19 22:30:18 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/20 14:46:49 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	ft_parse(t_pos *pos, int argc, char **argv)
 	}
 	if (!is_valid)
 	{
-		ft_free_stack(pos->stack_a);
+		ft_free_pos(pos);
 		write(2, "Error\n", 6);
 		return (0);
 	}
