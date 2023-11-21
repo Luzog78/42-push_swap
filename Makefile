@@ -6,7 +6,7 @@
 #    By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/16 07:59:02 by ysabik            #+#    #+#              #
-#    Updated: 2023/11/20 20:19:57 by ysabik           ###   ########.fr        #
+#    Updated: 2023/11/21 02:39:31 by ysabik           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC_FILES			= \
 	ft_calc_path_rra_rb.c \
 	ft_calc_path_rr.c \
 	ft_calc_path_rrr.c \
+	ft_check_solution.c \
 	ft_create_moves.c \
 	ft_create_pos.c \
 	ft_create_stack.c \

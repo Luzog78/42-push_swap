@@ -6,7 +6,7 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 15:10:27 by luzog             #+#    #+#             */
-/*   Updated: 2023/11/19 22:26:59 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/20 21:40:07 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ int	main(int argc, char **argv)
 	pos = ft_create_pos();
 	if (!ft_parse(pos, argc, argv))
 		return (0);
+	if (ft_check_solution(pos))
+	{
+		ft_free_pos(pos);
+		return (0);
+	}
 	size = ft_stack_size(pos->stack_a);
 	if (size <= 3)
 		ft_tiny_sort_algo(pos);

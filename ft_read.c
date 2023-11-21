@@ -6,123 +6,78 @@
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 08:54:42 by ysabik            #+#    #+#             */
-/*   Updated: 2023/11/16 09:01:30 by ysabik           ###   ########.fr       */
+/*   Updated: 2023/11/21 05:42:09 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_move_type	ft_read_s(void);
-static t_move_type	ft_read_p(void);
-static t_move_type	ft_read_r(void);
-static t_move_type	ft_read_rr(void);
+static int			ft_search(t_pos *pos, char *mov, int *i);
+static t_move_type	ft_get_mov(char *mov, int *i);
 
-t_move_type	ft_read(void)
+int	ft_read(t_pos *pos)
 {
-	int			ret;
-	char		c;
+	char	c;
+	int		ret;
+	char	mov[5];
+	int		i;
 
-	ret = read(0, &c, 1);
-	if (ret == 1)
+	i = 0;
+	while (i < 4)
 	{
-		if (c == 's')
-			return (ft_read_s());
-		else if (c == 'p')
-			return (ft_read_p());
-		else if (c == 'r')
-			return (ft_read_r());
-	}
-	return (NONE);
-}
-
-static t_move_type	ft_read_s(void)
-{
-	int			ret;
-	char		c;
-	t_move_type	type;
-
-	type = NONE;
-	ret = read(0, &c, 1);
-	if (ret == 1)
-	{
-		if (c == 'a')
-			type = SA;
-		else if (c == 'b')
-			type = SB;
-		else if (c == 's')
-			type = SS;
 		ret = read(0, &c, 1);
-		if (ret <= 0 || c == '\n')
-			return (type);
+		if (ret <= 0)
+			break ;
+		if (c == '\n')
+		{
+			if (i == 0)
+				i = -1;
+			else if (ft_search(pos, mov, &i))
+				continue ;
+			break ;
+		}
+		mov[i] = c;
+		mov[i + 1] = 0;
+		i++;
 	}
-	return (NONE);
+	return (!i);
 }
 
-static t_move_type	ft_read_p(void)
+static int	ft_search(t_pos *pos, char *mov, int *i)
 {
-	int			ret;
-	char		c;
-	t_move_type	type;
+	t_move_type	m;
 
-	type = NONE;
-	ret = read(0, &c, 1);
-	if (ret == 1)
-	{
-		if (c == 'a')
-			type = PA;
-		else if (c == 'b')
-			type = PB;
-		ret = read(0, &c, 1);
-		if (ret <= 0 || c == '\n')
-			return (type);
-	}
-	return (NONE);
+	m = ft_get_mov(mov, i);
+	if (m == NONE)
+		return (0);
+	ft_exec_move(pos, m);
+	*i = 0;
+	return (1);
 }
 
-static t_move_type	ft_read_r(void)
+static t_move_type	ft_get_mov(char *mov, int *i)
 {
-	int			ret;
-	char		c;
-	t_move_type	type;
-
-	type = NONE;
-	ret = read(0, &c, 1);
-	if (ret == 1)
-	{
-		if (c == 'a')
-			type = RA;
-		else if (c == 'b')
-			type = RB;
-		else if (c == 'r')
-			return (ft_read_rr());
-		ret = read(0, &c, 1);
-		if (ret <= 0 || c == '\n')
-			return (type);
-	}
-	return (NONE);
-}
-
-static t_move_type	ft_read_rr(void)
-{
-	int			ret;
-	char		c;
-	t_move_type	type;
-
-	type = NONE;
-	ret = read(0, &c, 1);
-	if (ret <= 0 || c == '\n')
+	if (*i == 3 && mov[0] == 'r' && mov[1] == 'r' && mov[2] == 'r')
+		return (RRR);
+	else if (*i == 3 && mov[0] == 'r' && mov[1] == 'r' && mov[2] == 'a')
+		return (RRA);
+	else if (*i == 3 && mov[0] == 'r' && mov[1] == 'r' && mov[2] == 'b')
+		return (RRB);
+	else if (*i == 2 && mov[0] == 'r' && mov[1] == 'r')
 		return (RR);
-	if (ret == 1)
-	{
-		if (c == 'a')
-			type = RRA;
-		else if (c == 'b')
-			type = RRB;
-		else if (c == 'r')
-			type = RRR;
-		ret = read(0, &c, 1);
-		if (ret <= 0 || c == '\n')
-			return (type);
-	}
+	else if (*i == 2 && mov[0] == 'r' && mov[1] == 'a')
+		return (RA);
+	else if (*i == 2 && mov[0] == 'r' && mov[1] == 'b')
+		return (RB);
+	else if (*i == 2 && mov[0] == 's' && mov[1] == 's')
+		return (SS);
+	else if (*i == 2 && mov[0] == 's' && mov[1] == 'a')
+		return (SA);
+	else if (*i == 2 && mov[0] == 's' && mov[1] == 'b')
+		return (SB);
+	else if (*i == 2 && mov[0] == 'p' && mov[1] == 'a')
+		return (PA);
+	else if (*i == 2 && mov[0] == 'p' && mov[1] == 'b')
+		return (PB);
 	return (NONE);
 }

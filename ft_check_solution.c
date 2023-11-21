@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   ft_check_solution.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ysabik <ysabik@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 15:10:27 by luzog             #+#    #+#             */
-/*   Updated: 2023/11/21 05:33:00 by ysabik           ###   ########.fr       */
+/*   Created: 2023/11/20 21:38:27 by ysabik            #+#    #+#             */
+/*   Updated: 2023/11/20 21:39:02 by ysabik           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_move_type	ft_read(t_pos *pos);
-
-int	main(int argc, char **argv)
+int	ft_check_solution(t_pos *pos)
 {
-	t_pos	*pos;
-	int		result;
+	t_stack	*tmp;
+	int		is_valid;
 
-	argc--;
-	argv++;
-	if (!argc)
-		return (0);
-	pos = ft_create_pos();
-	if (!ft_parse(pos, argc, argv))
-		return (0);
-	result = ft_read(pos);
-	if (!result)
-		write(1, "Error\n", 6);
-	else if (ft_check_solution(pos))
-		write(1, "OK\n", 3);
-	else
-		write(1, "KO\n", 3);
-	ft_free_pos(pos);
-	return (0);
+	tmp = pos->stack_a;
+	is_valid = !pos->stack_b;
+	while (tmp && tmp->next)
+	{
+		if (tmp->value > tmp->next->value)
+		{
+			is_valid = 0;
+			break ;
+		}
+		tmp = tmp->next;
+	}
+	return (is_valid);
 }
